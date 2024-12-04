@@ -112,7 +112,7 @@ class Process extends EventEmitter
     * @param null|array  $fds File descriptors to allocate for this process (or null = default STDIO streams)
     * @throws \LogicException On windows or when proc_open() is not installed
     */
-    public function __construct($cmd, $cwd = null, array $env = null, array $fds = null)
+    public function __construct($cmd, $cwd = null, ?array $env = null, ?array $fds = null)
     {
         if (!\function_exists('proc_open')) {
             throw new \LogicException('The Process class relies on proc_open(), which is not available on your PHP installation.');
@@ -164,7 +164,7 @@ class Process extends EventEmitter
      * @param float          $interval    Interval to periodically monitor process state (seconds)
      * @throws \RuntimeException If the process is already running or fails to start
      */
-    public function start(LoopInterface $loop = null, $interval = 0.1)
+    public function start(?LoopInterface $loop = null, $interval = 0.1)
     {
         if ($this->isRunning()) {
             throw new \RuntimeException('Process is already running');
